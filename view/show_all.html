@@ -1,0 +1,49 @@
+$def with(all_services)
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Jquery-treegrid basic example</title>
+
+    <link rel="stylesheet" href="/static/css/bootstrap.css"> 
+    <link rel="stylesheet" href="/static/css/jquery.treegrid.css">
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.treegrid.js"></script>
+    <script type="text/javascript">
+      \$(document).ready(function() {
+              \$('.tree').treegrid({
+                  expanderExpandedClass: 'glyphicon glyphicon-minus',
+                  expanderCollapsedClass: 'glyphicon glyphicon-plus'
+                  });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+        <div id="legend" class="">
+            <lengend class="componet"><h3>服务运行状态</h3></lengend>
+        </div>
+      <table class="table tree"> 
+        $ i = 0
+        $for project, services in all_services.items():
+            <tr class="treegrid-$i">
+                <td>$project</td>
+                <td></td>
+                $ parent = i
+                $ i = i + 1
+            </tr>
+            $for service in services:
+                <tr class="treegrid-$i treegrid-parent-$parent">
+                    <td><a href="$service.url">$service.name</a></td>
+                    $if service.status == 'available':
+                        <td><p class="text-success">$service.status</p></td>
+                    $else:
+                        <td><p class="text-error">$service.status</p></td>
+                </tr>
+                $ i = i + 1
+      </table>	  
+    </div>
+  </body>
+</html>

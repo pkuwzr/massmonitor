@@ -1,0 +1,78 @@
+<!DOCTYPE html> 
+<html lang="zh-CN"> 
+<head> 
+<meta charset="utf-8"> 
+<title>Registration for MASS Services</title> 
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/jqBootstrapValidation.js"></script>
+<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+<style type="text/css">
+    #target {
+        min-height: 200px;
+        border: 1px solid #ccc;
+        padding: 50px;
+    } 
+    #target .control-label {
+        position: relative;
+        padding: 10px 0px 10px 30px;
+    }
+    #target .controls {
+        position: relative;
+        padding: 10px 0px 10px 30px;
+    }
+    #target .form-actions {
+        position: relative;
+        padding: 10px 0px 0px 30px;
+    }
+</style>
+</head>
+<body>
+<form class="form-horizontal" method="POST" id="target"> 
+    <fieldset>
+      <div id="legend" class="">
+        <legend class="component">服务注册</legend>
+      </div>
+    <div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01">服务名称</label>
+          <div class="controls">
+            <input name="name" type="text" placeholder="" class="input-xlarge" required>
+            <p class="help-block">请输入服务名称</p>
+          </div>
+        </div><div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01">工程名称</label>
+          <div class="controls">
+            <input name="project" type="text" placeholder="" class="input-xlarge" required>
+            <p class="help-block">请输入工程名称</p>
+          </div>
+        </div><div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01">Url</label>
+          <div class="controls">
+            <input name="url" type="text" placeholder="http://" class="input-xlarge" required>
+            <p class="help-block">请输入服务监控地址</p>
+          </div>
+        </div><div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01">Email:</label>
+          <div class="controls">
+            <input name="email" type="email" placeholder="" class="input-xlarge" required>
+            <p class="help-block">请输入接收报警的邮箱</p>
+          </div>
+        </div>
+
+
+          <!-- Button -->
+          <div class="form-actions">
+            <button type="submit" class="btn btn-success">提交</button>
+          </div>
+    
+    </fieldset>
+  </form>
+</body>
+</html>
