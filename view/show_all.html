@@ -4,7 +4,7 @@ $def with(all_services)
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Jquery-treegrid basic example</title>
+    <title>Status of MASS Services</title>
 
     <link rel="stylesheet" href="/static/css/bootstrap.css"> 
     <link rel="stylesheet" href="/static/css/jquery.treegrid.css">
@@ -19,11 +19,16 @@ $def with(all_services)
                   });
       });
     </script>
+    <style type="text/css" media="all">
+        .container {
+            border: 1px solid #ccc;
+        } 
+    </style>
   </head>
   <body>
     <div class="container">
         <div id="legend" class="">
-            <lengend class="componet"><h3>服务运行状态</h3></lengend>
+            <legend class="componet"><h3>服务运行状态</h3></legend>
         </div>
       <table class="table tree"> 
         $ i = 0

@@ -6,6 +6,8 @@ from model import conn
 from model.models.service import Service
 
 urls = ("/signin", "Signin",
+        "/registeruser", "UserRegister",
+        "/main", "Main",
         "/registerservice", "ServiceRegister",
        "/showall", "ShowAll")
 app = web.application(urls, globals())
@@ -51,6 +53,15 @@ class Signin:
      def GET(self):
          return render.signin()
 
+
+class UserRegister:
+     def GET(self):
+         return render.register_user()
+
+
+class Main:
+     def GET(self):
+         return render.main()
 
 if __name__ == '__main__':
     app.run()

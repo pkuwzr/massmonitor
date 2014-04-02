@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>
-      登录 Mass Monitor
+      注册 Mass Monitor
     </title>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
@@ -12,7 +12,7 @@
     <script src="/static/js/jquery.validate.js" type="text/javascript"></script>
     <script type="text/javascript" charset="utf-8">
         \$().ready(function() {
-                \$("#signin").validate({
+                \$("#register").validate({
                     rules:{
                         user: {
                             required: true,
@@ -20,6 +20,10 @@
                         },
                         pwd:{
                             required: true
+                        },
+                        confirm_pwd:{
+                            required: true,
+                            equalTo: "#pwd"
                         }
                     },
                     messages:{
@@ -29,6 +33,10 @@
                         },
                         pwd:{
                             required: "请输入密码"
+                        },
+                        confirm_pwd:{
+                            required: "请再次输入密码",
+                            equalTo: "两次输入的密码不一致"
                         }
                     }
                     });
@@ -65,23 +73,27 @@
     <div class="login-wrapper">
         <h1>Mass Monitor</h1>
       <div class="login-container">
-        <form id="signin" class="form-horizontal" action="main.html">
+        <form id="register" class="" action="main.html">
             <div class="input-group">
                 <div class="input-prepend">
                     <span class="glyphicon glyphicon-envelope"></span>
-                    <input name="user" id="user" class="span2" placeholder="用户名(邮箱)" type="text">
+                    <input name="user" class="span2" placeholder="用户名(邮箱)" type="text">
                 </div>
-                <br />
-                <div class="input-prepend">
-                    <span class="glyphicon glyphicon-lock"></span>
-                    <input name="pwd" id="pwd" class="span2" placeholder="密码" type="text"><br /><br />
-                </div>
+                 <br />
+                 <div class="input-prepend">
+                   <span class="glyphicon glyphicon-lock"></span>
+                   <input name="pwd" id="pwd" class="span2" placeholder="密码" type="password"><br /><br />
+                 </div>
+                 <div class="input-prepend">
+                   <span class="glyphicon glyphicon-lock"></span>
+                   <input name="pwd-again" id="confirm_pwd" class="span2" placeholder="再次输入密码" type="password"><br /><br />
+                 </div>
             </div>
-            <input type="submit" value="登录" />
+            <input type="submit" value="注册" />
         </form>
         <br />
-        <p class="signup">
-           还没有账号？<a href="registeruser">立即注册</a>
+        <p class="signin">
+           已有账号？<a href="signin">立即登录</a>
         </p>
       </div>
     </div>
