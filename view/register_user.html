@@ -1,3 +1,4 @@
+$def with(message, status)
 <!DOCTYPE html>
 <html>
   <head>
@@ -21,7 +22,7 @@
                         pwd:{
                             required: true
                         },
-                        confirm_pwd:{
+                        pwdagain:{
                             required: true,
                             equalTo: "#pwd"
                         }
@@ -34,7 +35,7 @@
                         pwd:{
                             required: "请输入密码"
                         },
-                        confirm_pwd:{
+                        pwdagain:{
                             required: "请再次输入密码",
                             equalTo: "两次输入的密码不一致"
                         }
@@ -51,15 +52,13 @@
             margin-left:auto;
             margin-top:100px;
             text-align:center;
-            background:#D2E9FF;
             width:400px;
-            border: 1px solid #cccccc;
             -webkit-border-radius: 3px;
             -moz-border-radius: 3px;
             border-radius: 3px;
         }
         .login-container {
-            margin:50px 0px 0px 20px;
+            margin:50px 0px 0px 80px;
             width:400px;
         }
         .input-group {
@@ -72,12 +71,18 @@
     <!-- Login Screen -->
     <div class="login-wrapper">
         <h1>Mass Monitor</h1>
+        <div id="info" class="">
+            $if status == 1:
+               <span class="text-success" text-align='left'>$message</span>
+            $else:  
+               <span class="text-danger" text-align='left'>$message</span>
+        </div>
       <div class="login-container">
-        <form id="register" class="" action="main.html">
+        <form id="register" class="" action="registeruser" method="POST">
             <div class="input-group">
                 <div class="input-prepend">
                     <span class="glyphicon glyphicon-envelope"></span>
-                    <input name="user" class="span2" placeholder="用户名(邮箱)" type="text">
+                    <input name="user" id="user" class="span2" placeholder="用户名(邮箱)" type="text">
                 </div>
                  <br />
                  <div class="input-prepend">
@@ -86,7 +91,7 @@
                  </div>
                  <div class="input-prepend">
                    <span class="glyphicon glyphicon-lock"></span>
-                   <input name="pwd-again" id="confirm_pwd" class="span2" placeholder="再次输入密码" type="password"><br /><br />
+                   <input name="pwdagain" id="pwdagain" class="span2" placeholder="再次输入密码" type="password"><br /><br />
                  </div>
             </div>
             <input type="submit" value="注册" />

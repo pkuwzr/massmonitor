@@ -1,3 +1,4 @@
+$def with(message, status)
 <!DOCTYPE html>
 <html>
   <head>
@@ -43,15 +44,13 @@
             margin-left:auto;
             margin-top:100px;
             text-align:center;
-            background:#D2E9FF;
             width:400px;
-            border: 1px solid #cccccc;
             -webkit-border-radius: 3px;
             -moz-border-radius: 3px;
             border-radius: 3px;
         }
         .login-container {
-            margin:50px 0px 0px 20px;
+            margin:50px 0px 0px 80px;
             width:400px;
         }
         .input-group {
@@ -64,8 +63,14 @@
     <!-- Login Screen -->
     <div class="login-wrapper">
         <h1>Mass Monitor</h1>
+        <div id="info" class="">
+            $if status == 1:
+               <span class="text-success" text-align='left'>$message</span>
+            $else:  
+               <span class="text-danger" text-align='left'>$message</span>
+        </div>
       <div class="login-container">
-        <form id="signin" class="form-horizontal" action="main.html">
+        <form id="signin" class="form-horizontal" action="signin" method="POST">
             <div class="input-group">
                 <div class="input-prepend">
                     <span class="glyphicon glyphicon-envelope"></span>
@@ -74,7 +79,7 @@
                 <br />
                 <div class="input-prepend">
                     <span class="glyphicon glyphicon-lock"></span>
-                    <input name="pwd" id="pwd" class="span2" placeholder="密码" type="text"><br /><br />
+                    <input name="pwd" id="pwd" class="span2" placeholder="密码" type="password"><br /><br />
                 </div>
             </div>
             <input type="submit" value="登录" />

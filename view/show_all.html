@@ -41,11 +41,11 @@ $def with(all_services)
             </tr>
             $for service in services:
                 <tr class="treegrid-$i treegrid-parent-$parent">
-                    <td><a href="$service.url">$service.name</a></td>
-                    $if service.status == 'available':
-                        <td><p class="text-success">$service.status</p></td>
+                    <td><a href="$service[3]" target="view_window">$service[0]</a></td>
+                    $if service[-1] == 'available':
+                        <td><p class="text-success">$service[-1]</p></td>
                     $else:
-                        <td><p class="text-error">$service.status</p></td>
+                        <td><p class="text-danger">$service[-1]</p></td>
                 </tr>
                 $ i = i + 1
       </table>	  

@@ -3,15 +3,16 @@
 
 import conn
 from models.service import Service
+from models.user import User
 
-# -------- 插入数据 --------
-service = Service()
-service.name = 'massmonitor'
-service.project = 'monitors'
-service.email = 'wzr.cs09@qq.com'
-service.url = 'http://localhost:8000'
-service.save()
+#services = Service().findall_by_email('wzr.cs09@qq.com')
+services = Service().findall()
+service_dict = {}
+for service in services:
+    tmp = service
+    if tmp.project in service_dict:
+        service_dict[tmp.project].append(tmp)
+    else:
+        service_dict[tmp.project] = [tmp]
 
-service = Service().findall()
-for s in service:
-    s.delete()
+print service_dict

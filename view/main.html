@@ -14,6 +14,9 @@
                         \$(this).tab('show')
                     })
                 \$('#tabs a:first').tab('show')
+                \$('#signout').click(function() {
+                        location.href = '/signout'
+                    })
                 });
     </script>
     <style type="text/css" media="all">
@@ -28,10 +31,15 @@
         <div id="legend" class="">
             <lengend class="componet"><h2>MASS Monitor</h2></lengend>
         </div>
-        <div id="navbar" class="container">
-            <ul id="tabs" class="nav nav-pills">
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul id="tabs" class="nav navbar-nav nav-pills">
                 <li class="active"><a href="#showall" data-toggle="tab">所有服务</a></li>
                 <li class=""><a href="#registerservice" data-toggle="tab">添加新服务</a></li>
+                <li>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <button id="signout" type="button" class="btn btn-info navbar-btn">注销</button>
             </ul>
         </div>
         <div id="tabcontent"class="tab-content">
