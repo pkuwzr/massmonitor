@@ -4,10 +4,22 @@
 <meta charset="utf-8"> 
 <title>Registration for MASS Services</title> 
 <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript">
+    \$().ready(function() {
+            setInterval(function(){
+                   var new_value = parseInt(\$("#count").text()) - 1;
+                   if (new_value == 0) {
+                        window.top.location = '/main'
+                   }
+                   \$("#count").text(new_value);
+                }, 1000);
+            })
+</script>
 </head>
 <body>
     <div class="alert alert-success">
-        注册服务成功！
+        注册服务成功！<span id="count">3</span> 秒后跳转至首页
     </div>
 </body>
 </html>

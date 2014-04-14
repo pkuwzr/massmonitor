@@ -11,7 +11,8 @@ urls = ("/signin", "Signin",
         "/registeruser", "UserRegister",
         "/main", "Main",
         "/registerservice", "ServiceRegister",
-       "/showall", "ShowAll")
+       "/showall", "ShowAll",
+       "/showcustom", "ShowCustom")
 app = web.application(urls, globals())
 
 if web.config.get('_session') is None:
@@ -25,6 +26,7 @@ ADMIN = ['mass@sei.pku.edu.cn', 'wangzr13@sei.pku.edu.cn']
 welcom_msg = '欢迎使用'
 err_msg = '用户名或者密码错误'
 
+
 def logged():
     """
     A function for decide if the user has logged in.
@@ -33,6 +35,25 @@ def logged():
         return True
     else:
         return False
+
+
+class ShowCustom:
+    def GET(self):
+        try:
+            user = web.input().email
+            if user in ADMIN:
+                services = Service().findall()
+            else:
+                services = Service().findall_by_email(user)
+            service_dict = {}
+            for service in services:
+                if service.project in service_dict:
+                    service_dict[service.project].append((service.name, service.project, service.email, service.url, service.id, service.status))
+                else:
+                    service_dict[service.project] = [(service.name, service.project, service.email, service.url, service.id, service.status)]
+            return render.show_all(service_dict)
+        except Exception:
+            return 'No such user!'
 
 
 class ShowAll:
@@ -56,18 +77,22 @@ class ShowAll:
 class ServiceRegister:
     def GET(self):
         # do $:f.render() in the template
-        return render.register_service()
+        return render.register_service(1)
 
     def POST(self):
         data = web.input()
-        print data.keys()
-        service = Service()
-        service.name = data.name
-        service.project = data.project
-        service.url = data.url
-        service.email = session.user
-        service.save()
-        return render.success()
+        query = "select * from service where name = '" + data.name + "' and project = '" + data.project + "'"
+        result = Service().execute(query).rowcount
+        if result == 0:
+            service = Service()
+            service.name = data.name
+            service.project = data.project
+            service.url = data.url
+            service.email = session.user
+            service.save()
+            return render.success()
+        else:
+            return render.register_service(0)
 
 
 class Signin:
