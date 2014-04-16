@@ -1,3 +1,4 @@
 # ignore the pyc file
 *.pyc
 session/
+model/conn.py
