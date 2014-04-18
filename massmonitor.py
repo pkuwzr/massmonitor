@@ -11,8 +11,9 @@ urls = ("/signin", "Signin",
         "/registeruser", "UserRegister",
         "/main", "Main",
         "/registerservice", "ServiceRegister",
-       "/showall", "ShowAll",
-       "/showcustom", "ShowCustom")
+        "/deleteservice", "ServiceRemover",
+        "/showall", "ShowAll",
+        "/showcustom", "ShowCustom")
 app = web.application(urls, globals())
 
 if web.config.get('_session') is None:
@@ -93,6 +94,13 @@ class ServiceRegister:
             return render.success()
         else:
             return render.register_service(0)
+
+
+class ServiceRemover:
+    def POST(self):
+        id = web.input().id
+        Service().find(int(id)).delete()
+        return '{status:ok}'
 
 
 class Signin:

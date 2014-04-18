@@ -11,18 +11,70 @@ $def with(all_services)
 
     <script src="/static/js/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/jquery.treegrid.js"></script>
+    <script type="text/javascript" src="/static/js/modal.js"></script>
     <script type="text/javascript">
       \$(document).ready(function() {
               \$('.tree').treegrid({
+                  initialState: 'collapsed',
                   expanderExpandedClass: 'glyphicon glyphicon-minus',
                   expanderCollapsedClass: 'glyphicon glyphicon-plus'
+                  });
+              \$('.close button').click(function() {
+                  var thisNode = \$(this).parents('tr');
+                  var app_id = thisNode.attr('id');
+                  var parentNode = \$(this).parent().parent().treegrid('getParentNode');
+                  var childs = parentNode.treegrid('getChildNodes');
+                  var last = false;
+                  alert(app_id)
+                  if (childs[1] == undefined) {
+                      \$('#ok').click(function() {
+                          \$.post("/deleteservice",
+                              {
+                                  id:app_id
+                              },
+                              function(data, status) {
+                                  if (status == 'success'){
+                                      thisNode.remove();
+                                      parentNode.remove();
+                                  }
+                                  else {
+                                      alert("删除失败，请稍后重试。");
+                                  }
+                                  \$('#warning').modal('hide');
+                              }
+                              );
+                      });
+                      \$('#warning').modal('show');
+                  }
+                  else {
+                      \$.post("/deleteservice", {
+                              id:app_id
+                              },
+                              function(data, status) {
+                              if (status == 'success'){
+                              thisNode.remove();
+                              }
+                              else{
+                                  alert("删除失败，请稍后重试");
+                              }
+                              });
+                  }
                   });
       });
     </script>
     <style type="text/css" media="all">
         .container {
             border: 1px solid #ccc;
+            font-family: "Times New Roman",Georgia,Serif;
+            font-size: 18px;
         } 
+        table {
+            border: 0;
+        }
+        td {
+            height: 40px;
+            vertical-align: bottom;
+        }
     </style>
   </head>
   <body>
@@ -40,15 +92,38 @@ $def with(all_services)
                 $ i = i + 1
             </tr>
             $for service in services:
-                <tr class="treegrid-$i treegrid-parent-$parent">
+                <tr id="$service[4]" class="treegrid-$i treegrid-parent-$parent">
                     <td><a href="$service[3]" target="view_window">$service[0]</a></td>
                     $if service[-1] == 'available':
                         <td><p class="text-success">$service[-1]</p></td>
                     $else:
                         <td><p class="text-danger">$service[-1]</p></td>
+                    <td class="close"> 
+                        <button type="button" class="btn btn-default btn-xs" title="取消订阅">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </td>
                 </tr>
                 $ i = i + 1
       </table>	  
     </div>
+    
+    <div id="warning" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">警告</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger">这是该工程中的最后一个服务，删除该服务同时将删除工程！</div>
+                </div>
+                <div class="modal-footer">
+                    <button id="ok" type="button" class="btn btn-primary">确定</button>
+                    <button id="cancel" type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
   </body>
 </html>

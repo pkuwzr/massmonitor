@@ -4,7 +4,5 @@
 import conn
 from models.service import Service
 
-services = Service().findall()
-for service in services:
-    service.status = 'available'
-    service.save()
+s = Service().find(5)
+print s.id
